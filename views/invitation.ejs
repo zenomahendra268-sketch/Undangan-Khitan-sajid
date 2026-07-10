@@ -722,6 +722,53 @@
     // Ubah tampilan form setelah kirim
     form.innerHTML = '<div class="wish" style="text-align:center; border-left:none; background:#e8f5e9;"><b>Terima Kasih!</b>Konfirmasi kehadiran Anda telah terkirim.</div>';
   });
+// ===== Background Music =====
+const music = document.createElement("audio");
+music.id = "bgMusic";
+music.loop = true;
+music.innerHTML = '<source src="/audio/lagu.mp3" type="audio/mpeg">';
+document.body.appendChild(music);
+
+// Tombol speaker
+const btn = document.createElement("button");
+btn.id = "musicBtn";
+btn.innerHTML = "🔇";
+document.body.appendChild(btn);
+
+btn.style.cssText = `
+position:fixed;
+top:20px;
+right:20px;
+width:50px;
+height:50px;
+border:none;
+border-radius:50%;
+background:rgba(255,255,255,.9);
+font-size:22px;
+cursor:pointer;
+z-index:99999;
+box-shadow:0 4px 12px rgba(0,0,0,.25);
+`;
+
+let started = false;
+
+document.addEventListener("click", () => {
+  if (!started) {
+    music.play();
+    btn.innerHTML = "🔊";
+    started = true;
+  }
+}, { once: true });
+
+btn.addEventListener("click", () => {
+  if (music.paused) {
+    music.play();
+    btn.innerHTML = "🔊";
+  } else {
+    music.pause();
+    btn.innerHTML = "🔇";
+  }
+});
 </script>
 
 </body>
