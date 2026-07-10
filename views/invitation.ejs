@@ -474,6 +474,7 @@
     background:var(--emerald-deep);
     color:var(--cream);
     text-align:center;
+    padding-top: 80px; /* Tambah jarak atas agar tidak mepet */
     padding-bottom:60px;
   }
   .closing .bismillah{
@@ -586,7 +587,7 @@
 <section class="section note reveal">
   <div class="pattern-bg"></div>
   <div class="portrait">
-    <img src="/images/profile.jpg" alt="Sajid">
+    <img src="/images/profile.png" alt="Sajid">
   </div>
   <div class="eyebrow">Untuk Sang Jagoan</div>
   <h2 class="section-title">Dari Kami, Orang Tua</h2>
@@ -599,12 +600,12 @@
   <div class="eyebrow">Kenangan</div>
   <h2 class="section-title">Galeri Kecil</h2>
   <div class="grid">
-    <div><img src="/images/g1.jpg" alt="Gallery 1"></div>
-    <div><img src="/images/g2.jpg" alt="Gallery 2"></div>
-    <div><img src="/images/g3.jpg" alt="Gallery 3"></div>
-    <div><img src="/images/g4.jpg" alt="Gallery 4"></div>
-    <div><img src="/images/g5.jpg" alt="Gallery 5"></div>
-    <div><img src="/images/g6.jpg" alt="Gallery 6"></div>
+    <div><img src="/images/galeri1.png" alt="Gallery 1"></div>
+    <div><img src="/images/galeri2.png" alt="Gallery 2"></div>
+    <div><img src="/images/galeri3.png" alt="Gallery 3"></div>
+    <div><img src="/images/galeri4.png" alt="Gallery 4"></div>
+    <div><img src="/images/galeri5.png" alt="Gallery 5"></div>
+    <div><img src="/images/galeri6.png" alt="Gallery 6"></div>
   </div>
   <div class="gallery-hint">Ganti kotak warna ini dengan foto favorit Sajid</div>
 </section>
@@ -672,7 +673,7 @@
   tick();
   setInterval(tick,1000);
 
-  // rsvp (in-memory only, resets on reload)
+  // rsvp & WhatsApp Integration
   const form = document.getElementById('rsvpForm');
   const wishList = document.getElementById('wishList');
   form.addEventListener('submit', function(e){
@@ -680,11 +681,24 @@
     const name = document.getElementById('name').value.trim();
     const wish = document.getElementById('wish').value.trim();
     const hadir = form.querySelector('input[name="hadir"]:checked').value;
+    
     if(!name || !wish) return;
+
+    // Tampilkan di list (sementara)
     const div = document.createElement('div');
     div.className = 'wish';
     div.innerHTML = '<b>'+name+' · '+hadir+'</b>'+wish;
     wishList.prepend(div);
+
+    // Kirim ke WhatsApp
+    const phoneNumber = "6283892111623";
+    const message = `Halo, saya *${name}*.\n\nKonfirmasi Kehadiran: *${hadir}*\nUcapan & Doa: ${wish}`;
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+    // Buka WhatsApp di tab baru
+    window.open(whatsappUrl, '_blank');
+    
     form.reset();
   });
 </script>
