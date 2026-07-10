@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Kelola Tamu Undangan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #14263f;
+            --accent: #c79a3c;
+            --danger: #8c3a2c;
+            --bg: #f6f1e2;
+            --text: #1e1b16;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        h1 { color: var(--primary); margin-bottom: 20px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+        button:hover { opacity: 0.9; }
+        .guest-list { margin-top: 40px; overflow-x: auto; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+        th { background-color: #f9f9f9; }
+        .actions { display: flex; gap: 8px; }
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 12px;
+            border-radius: 4px;
+        }
+        .btn-copy { background-color: var(--accent); }
+        .btn-edit { background-color: #2f5a86; }
+        .btn-delete { background-color: var(--danger); }
+        .link-text {
+            font-size: 13px;
+            color: #666;
+            word-break: break-all;
+            max-width: 250px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+        }
+        .modal-header {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .close {
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Kelola Tamu Undangan</h1>
+        
+        <!-- Form Tambah -->
+        <form action="/admin/add-guest" method="POST">
+            <div class="form-group">
+                <label for="name">Nama Tamu Baru</label>
+                <input type="text" id="name" name="name" placeholder="Contoh: Bapak Budi & Keluarga" required>
+            </div>
+            <button type="submit">Tambah Tamu & Generate Link</button>
+        </form>
+
+        <!-- Tabel Daftar Tamu -->
+        <div class="guest-list">
+            <h2>Daftar Tamu (<%= guests.length %>)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Link Undangan</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% guests.forEach(guest => { %>
+                        <tr>
+                            <td><strong><%= guest.name %></strong></td>
+                            <td class="link-text"><%= guest.link %></td>
+                            <td>
+                                <div class="actions">
+                                    <button class="btn-small btn-copy" onclick="copyToClipboard('<%= guest.link %>')">Salin</button>
+                                    <button class="btn-small btn-edit" onclick="openEditModal('<%= guest.id %>', '<%= guest.name %>')">Edit</button>
+                                    <form action="/admin/delete-guest" method="POST" onsubmit="return confirm('Hapus tamu ini?')">
+                                        <input type="hidden" name="id" value="<%= guest.id %>">
+                                        <button type="submit" class="btn-small btn-delete">Hapus</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    <% }) %>
+                    <% if (guests.length === 0) { %>
+                        <tr>
+                            <td colspan="3" style="text-align: center; color: #999;">Belum ada tamu yang ditambahkan.</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal Edit -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Nama Tamu</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <form action="/admin/edit-guest" method="POST">
+                <input type="hidden" id="edit-id" name="id">
+                <div class="form-group">
+                    <label for="edit-name">Nama Tamu</label>
+                    <input type="text" id="edit-name" name="name" required>
+                </div>
+                <button type="submit" style="width: 100%;">Simpan Perubahan</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Link berhasil disalin!');
+            }).catch(err => {
+                console.error('Gagal menyalin: ', err);
+            });
+        }
+
+        function openEditModal(id, name) {
+            document.getElementById('edit-id').value = id;
+            document.getElementById('edit-name').value = name;
+            document.getElementById('editModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('editModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khitanan Sajid Abdullah Assami — Undangan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital@0;1&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --emerald-deep:#14263f;
+    --emerald-mid:#2f5a86;
+    --gold:#c79a3c;
+    --gold-soft:#e4c877;
+    --cream:#f6f1e2;
+    --rust:#8c3a2c;
+    --ink:#1e1b16;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Plus Jakarta Sans', sans-serif;
+    overflow-x:hidden;
+  }
+  /* ---------- utility ---------- */
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--emerald-mid);
+    font-weight:600;
+  }
+  .section{
+    max-width:640px;
+    margin:0 auto;
+    padding:88px 28px;
+    position:relative;
+  }
+  .section-title{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(28px,6vw,38px);
+    color:var(--emerald-deep);
+    margin:10px 0 6px;
+  }
+  .divider{
+    width:56px;height:2px;background:var(--gold);
+    margin:22px auto;
+    border:none;
+  }
+  .reveal{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity .8s ease, transform .8s ease;
+  }
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ---------- background pattern ---------- */
+  .pattern-bg{
+    position:absolute;inset:0;
+    opacity:.05;
+    pointer-events:none;
+    background-image:
+      radial-gradient(circle, var(--emerald-deep) 1.4px, transparent 1.4px);
+    background-size:26px 26px;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    background:
+      radial-gradient(120% 90% at 50% -10%, #1c3a5e 0%, var(--emerald-deep) 55%, #081625 100%);
+    color:var(--cream);
+    padding:56px 24px 40px;
+    overflow:hidden;
+  }
+  .hero .pattern-bg{opacity:.08;background-image:radial-gradient(circle, var(--gold) 1.4px, transparent 1.4px);}
+  .hero .bismillah{
+    font-family:'Amiri', serif;
+    font-size:clamp(22px,5.6vw,30px);
+    color:var(--gold-soft);
+    margin-bottom:6px;
+    opacity:0;
+    animation:fadeIn 1s ease .2s forwards;
+  }
+  .hero .greet{
+    font-size:13px;
+    letter-spacing:.14em;
+    color:#cfdbe6;
+    max-width:340px;
+    line-height:1.7;
+    opacity:0;
+    animation:fadeIn 1s ease .5s forwards;
+  }
+
+  /* emblem */
+  .emblem-wrap{
+    margin:34px 0 26px;
+    width:min(78vw,300px);
+    aspect-ratio:1/1.08;
+    position:relative;
+    opacity:0;
+    animation:fadeIn 1s ease .7s forwards;
+  }
+  .emblem-wrap svg{width:100%;height:100%;overflow:visible;}
+  .emblem-path{
+    fill:none;
+    stroke:var(--gold);
+    stroke-width:1.6;
+    stroke-dasharray:900;
+    stroke-dashoffset:900;
+    animation:draw 2.6s ease-out .9s forwards;
+  }
+  .emblem-inner-path{
+    fill:none;
+    stroke:var(--gold-soft);
+    stroke-width:1;
+    opacity:.7;
+    stroke-dasharray:400;
+    stroke-dashoffset:400;
+    animation:draw 2s ease-out 1.6s forwards;
+  }
+  .emblem-center{
+    position:absolute;inset:0;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    text-align:center;
+    padding:0 14%;
+  }
+  .emblem-label{
+    font-size:10px;letter-spacing:.24em;
+    color:var(--gold-soft);
+    text-transform:uppercase;
+    opacity:0;
+    animation:fadeIn .8s ease 2.4s forwards;
+  }
+  .child-name{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(30px,8vw,46px);
+    line-height:1.05;
+    margin:8px 0 4px;
+    color:var(--cream);
+    opacity:0;
+    animation:fadeIn .8s ease 2.6s forwards;
+  }
+  .nickname{
+    font-size:12px;
+    letter-spacing:.2em;
+    color:var(--gold);
+    text-transform:uppercase;
+    opacity:0;
+    animation:fadeIn .8s ease 2.8s forwards;
+  }
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  @keyframes fadeIn{to{opacity:1;}}
+
+  .hero-sub{
+    margin-top:24px;
+    font-size:14px;
+    color:#d8e2ec;
+    opacity:0;
+    animation:fadeIn 1s ease 3s forwards;
+  }
+  .hero-date{
+    font-family:'Fraunces', serif;
+    font-size:19px;
+    color:var(--gold-soft);
+    margin-top:6px;
+    opacity:0;
+    animation:fadeIn 1s ease 3.1s forwards;
+  }
+
+  /* Guest Personalization */
+  .guest-box {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid var(--gold-soft);
+    background: rgba(228, 200, 119, 0.1);
+    border-radius: 8px;
+    opacity: 0;
+    animation: fadeIn 1s ease 3.2s forwards;
+  }
+  .guest-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gold-soft);
+  }
+  .guest-name {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    color: var(--cream);
+    margin-top: 5px;
+  }
+
+  .scroll-cue{
+    position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+    font-size:10px;letter-spacing:.2em;color:#a8b9c9;
+    text-transform:uppercase;
+    display:flex;flex-direction:column;align-items:center;gap:6px;
+    opacity:0;
+    animation:fadeIn 1s ease 3.3s forwards;
+  }
+  .scroll-cue span{
+    width:1px;height:22px;background:linear-gradient(var(--gold),transparent);
+    animation:scrollLine 1.6s ease-in-out infinite;
+  }
+  @keyframes scrollLine{0%,100%{opacity:.3;}50%{opacity:1;}}
+
+  /* ---------- opening ---------- */
+  .opening{text-align:center;}
+  .opening p{
+    font-size:15.5px;
+    line-height:1.9;
+    color:#3a352c;
+    margin-top:14px;
+  }
+  .verse{
+    margin-top:26px;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:16px;
+    color:var(--emerald-deep);
+    line-height:1.8;
+    padding:20px 22px;
+    border-top:1px solid #ded4b6;
+    border-bottom:1px solid #ded4b6;
+  }
+  .verse cite{
+    display:block;
+    font-style:normal;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-size:11px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-top:10px;
+  }
+
+  /* ---------- event card ---------- */
+  .event{background:var(--emerald-deep);color:var(--cream);}
+  .event .eyebrow{color:var(--gold-soft);}
+  .event .section-title{color:var(--cream);}
+  .card{
+    margin-top:30px;
+    background:rgba(246,241,226,.06);
+    border:1px solid rgba(199,154,60,.35);
+    border-radius:4px;
+    padding:30px 26px;
+  }
+  .row{
+    display:flex;
+    gap:16px;
+    padding:14px 0;
+    border-bottom:1px solid rgba(246,241,226,.12);
+    text-align:left;
+    align-items:flex-start;
+  }
+  .row:last-child{border-bottom:none;}
+  .row .ico{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:13px;
+    color:var(--gold);
+    width:64px;
+    flex-shrink:0;
+    padding-top:2px;
+  }
+  .row .val{
+    font-size:15px;
+    line-height:1.6;
+  }
+  .row .val strong{
+    display:block;
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:17px;
+    margin-bottom:2px;
+  }
+  .map-btn{
+    display:inline-block;
+    margin-top:18px;
+    font-size:12px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--emerald-deep);
+    background:var(--gold);
+    padding:12px 22px;
+    border-radius:2px;
+    text-decoration:none;
+    font-weight:600;
+    transition:background .2s ease;
+  }
+  .map-btn:hover{background:var(--gold-soft);}
+
+  /* countdown */
+  .countdown{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    margin-top:34px;
+    flex-wrap:wrap;
+  }
+  .cd-unit{
+    background:rgba(246,241,226,.05);
+    border:1px solid rgba(199,154,60,.3);
+    border-radius:3px;
+    width:70px;
+    padding:14px 0 10px;
+    text-align:center;
+  }
+  .cd-unit .num{
+    font-family:'Fraunces',serif;
+    font-size:26px;
+    color:var(--gold-soft);
+    display:block;
+    font-variant-numeric:tabular-nums;
+  }
+  .cd-unit .lbl{
+    font-size:9px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:#bcc9d8;
+    margin-top:4px;
+    display:block;
+  }
+
+  /* ---------- note from parents ---------- */
+  .note{text-align:center;}
+  .portrait{
+    width:104px;height:104px;
+    border-radius:50%;
+    margin:0 auto 22px;
+    border:3px solid var(--cream);
+    box-shadow:0 0 0 1px rgba(23,51,39,.15);
+    overflow: hidden;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .portrait img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .note p{
+    font-size:15.5px;
+    line-height:1.95;
+    color:#3a352c;
+  }
+  .signoff{
+    margin-top:22px;
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:20px;
+    color:var(--emerald-deep);
+  }
+  .signoff small{
+    display:block;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-style:normal;
+    font-size:11.5px;
+    letter-spacing:.08em;
+    color:#6b6350;
+    margin-top:4px;
+  }
+
+  /* ---------- gallery ---------- */
+  .gallery{background:var(--cream);text-align:center;}
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin-top:30px;
+  }
+  .grid div{
+    aspect-ratio:1;
+    border-radius:3px;
+    overflow: hidden;
+    background: #eee;
+  }
+  .grid div img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .gallery-hint{
+    margin-top:14px;
+    font-size:12px;
+    color:#8a8267;
+  }
+
+  /* ---------- rsvp ---------- */
+  .rsvp{background:#efe8d3;}
+  .rsvp .section-title{text-align:center;}
+  form{margin-top:28px;display:flex;flex-direction:column;gap:14px;}
+  label{
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--emerald-mid);
+    font-weight:600;
+    margin-bottom:6px;
+    display:block;
+  }
+  input[type=text], textarea, select{
+    width:100%;
+    border:1px solid #cdc2a0;
+    background:#fbf8ee;
+    padding:12px 14px;
+    font-family:inherit;
+    font-size:14.5px;
+    color:var(--ink);
+    border-radius:2px;
+    outline:none;
+    transition:border-color .2s ease;
+  }
+  input[type=text]:focus, textarea:focus, select:focus{
+    border-color:var(--gold);
+  }
+  textarea{resize:vertical;min-height:80px;}
+  .radio-group{display:flex;gap:10px;flex-wrap:wrap;}
+  .radio-group label{
+    display:flex;align-items:center;gap:6px;
+    text-transform:none;letter-spacing:0;font-weight:500;
+    font-size:14px;color:var(--ink);
+    border:1px solid #cdc2a0;
+    padding:9px 14px;border-radius:20px;
+    cursor:pointer;
+    margin-bottom:0;
+    background:#fbf8ee;
+  }
+  .radio-group input{accent-color:var(--emerald-deep);}
+  .submit-btn{
+    margin-top:6px;
+    background:var(--emerald-deep);
+    color:var(--cream);
+    border:none;
+    padding:15px;
+    font-size:12.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-weight:600;
+    border-radius:2px;
+    cursor:pointer;
+    transition:background .2s ease;
+  }
+  .submit-btn:hover{background:#081625;}
+  .wishes{margin-top:32px;display:flex;flex-direction:column;gap:12px;}
+  .wish{
+    background:#fbf8ee;
+    border-left:2px solid var(--gold);
+    padding:12px 16px;
+    font-size:13.5px;
+    line-height:1.6;
+    border-radius:0 2px 2px 0;
+  }
+  .wish b{display:block;font-size:13px;color:var(--emerald-deep);margin-bottom:2px;}
+  .form-note{
+    text-align:center;font-size:12px;color:#8a8267;margin-top:16px;
+  }
+
+  /* ---------- closing ---------- */
+  .closing{
+    background:var(--emerald-deep);
+    color:var(--cream);
+    text-align:center;
+    padding-bottom:60px;
+  }
+  .closing .bismillah{
+    font-family:'Amiri',serif;
+    font-size:22px;
+    color:var(--gold-soft);
+    margin-bottom:14px;
+  }
+  .closing p{
+    font-size:14.5px;
+    line-height:1.9;
+    color:#d8e2ec;
+    max-width:440px;
+    margin:0 auto;
+  }
+  .closing .fam{
+    margin-top:26px;
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-size:19px;
+    color:var(--gold);
+  }
+  .credit{
+    margin-top:50px;
+    font-size:10.5px;
+    letter-spacing:.1em;
+    color:#7f95ab;
+  }
+
+  @media(max-width:400px){
+    .cd-unit{width:60px;}
+    .row .ico{width:52px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="pattern-bg"></div>
+  <div class="bismillah">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+  <div class="greet">ASSALAMU'ALAIKUM WARAHMATULLAHI WABARAKATUH<br>Dengan penuh syukur, kami mengundang Bapak/Ibu/Saudara/i untuk hadir di hari istimewa putra kami</div>
+
+  <div class="emblem-wrap">
+    <svg viewBox="0 0 300 324">
+      <path class="emblem-path" d="M150 8 L280 46 L280 168 C280 246 222 296 150 316 C78 296 20 246 20 168 L20 46 Z"/>
+      <path class="emblem-inner-path" d="M150 26 L262 58 L262 166 C262 234 212 278 150 296 C88 278 38 234 38 166 L38 58 Z"/>
+    </svg>
+    <div class="emblem-center">
+      <div class="emblem-label">Khitanan Putra Kami</div>
+      <div class="child-name">Sajid Abdullah<br>Assami</div>
+      <div class="nickname">— Sajid —</div>
+    </div>
+  </div>
+
+  <div class="hero-sub">Insya Allah akan diselenggarakan pada</div>
+  <div class="hero-date">Minggu, 19 Juli 2026, 08.00 WIB</div>
+
+  <!-- Guest Personalized Info -->
+  <div class="guest-box">
+    <div class="guest-label">Kepada Yth.</div>
+    <div class="guest-name"><%= guestName %></div>
+  </div>
+
+  <div class="scroll-cue"><span></span>Geser</div>
+</section>
+
+<!-- OPENING -->
+<section class="section opening reveal">
+  <div class="pattern-bg"></div>
+  <div class="eyebrow">Sepatah Kata</div>
+  <h2 class="section-title">Menuju Langkah Baru</h2>
+  <p>Hari ini, putra kami akan menunaikan sunnah Rasul dan melangkah dengan lebih berani. Kami mengundang doa restu Bapak/Ibu/Saudara/i agar ia tumbuh menjadi anak yang sehat, kuat, dan berbakti.</p>
+  <div class="verse">
+    "Barangsiapa menempuh jalan untuk mencari ilmu, Allah akan mudahkan baginya jalan menuju surga."
+    <cite>HR. Muslim</cite>
+  </div>
+</section>
+
+<!-- EVENT -->
+<section class="section event reveal">
+  <div class="eyebrow">Waktu &amp; Tempat</div>
+  <h2 class="section-title">Detail Acara</h2>
+
+  <div class="card">
+    <div class="row">
+      <div class="ico">Hari</div>
+      <div class="val"><strong>Minggu</strong>19 Juli 2026</div>
+    </div>
+    <div class="row">
+      <div class="ico">Waktu</div>
+      <div class="val"><strong>08.00 — selesai</strong>WIB, dilanjutkan santap siang</div>
+    </div>
+    <div class="row">
+      <div class="ico">Lokasi</div>
+      <div class="val"><strong>Kediaman Keluarga</strong>Kp. Cibuluh RT 025/RW 10</div>
+    </div>
+    <a class="map-btn" href="#" onclick="return false;">Lihat Peta Lokasi</a>
+  </div>
+
+  <div class="countdown" id="countdown">
+    <div class="cd-unit"><span class="num" id="cd-d">00</span><span class="lbl">Hari</span></div>
+    <div class="cd-unit"><span class="num" id="cd-h">00</span><span class="lbl">Jam</span></div>
+    <div class="cd-unit"><span class="num" id="cd-m">00</span><span class="lbl">Menit</span></div>
+    <div class="cd-unit"><span class="num" id="cd-s">00</span><span class="lbl">Detik</span></div>
+  </div>
+</section>
+
+<!-- NOTE FROM PARENTS -->
+<section class="section note reveal">
+  <div class="pattern-bg"></div>
+  <div class="portrait">
+    <img src="/images/profile.jpg" alt="Sajid">
+  </div>
+  <div class="eyebrow">Untuk Sang Jagoan</div>
+  <h2 class="section-title">Dari Kami, Orang Tua</h2>
+  <p>Nak, hari ini kamu membuktikan keberanianmu. Semoga langkah kecil ini membawa berkah besar untuk hidupmu. Kami bangga padamu.</p>
+  <div class="signoff">Bapak &amp; Ibu<small>Ayah &amp; Bunda Sajid</small></div>
+</section>
+
+<!-- GALLERY -->
+<section class="section gallery reveal">
+  <div class="eyebrow">Kenangan</div>
+  <h2 class="section-title">Galeri Kecil</h2>
+  <div class="grid">
+    <div><img src="/images/g1.jpg" alt="Gallery 1"></div>
+    <div><img src="/images/g2.jpg" alt="Gallery 2"></div>
+    <div><img src="/images/g3.jpg" alt="Gallery 3"></div>
+    <div><img src="/images/g4.jpg" alt="Gallery 4"></div>
+    <div><img src="/images/g5.jpg" alt="Gallery 5"></div>
+    <div><img src="/images/g6.jpg" alt="Gallery 6"></div>
+  </div>
+  <div class="gallery-hint">Ganti kotak warna ini dengan foto favorit Sajid</div>
+</section>
+
+<!-- RSVP -->
+<section class="section rsvp reveal">
+  <div class="eyebrow" style="text-align:center;display:block;">Konfirmasi Kehadiran</div>
+  <h2 class="section-title">Kirim Doa &amp; RSVP</h2>
+  <form id="rsvpForm">
+    <div>
+      <label for="name">Nama Anda</label>
+      <input type="text" id="name" value="<%= guestName !== 'Tamu Undangan' ? guestName : '' %>" placeholder="Tulis nama lengkap" required>
+    </div>
+    <div>
+      <label>Konfirmasi Kehadiran</label>
+      <div class="radio-group">
+        <label><input type="radio" name="hadir" value="Hadir" checked> Insya Allah Hadir</label>
+        <label><input type="radio" name="hadir" value="Tidak Hadir"> Tidak Bisa Hadir</label>
+      </div>
+    </div>
+    <div>
+      <label for="wish">Ucapan &amp; Doa</label>
+      <textarea id="wish" placeholder="Tulis doa terbaik untuk Sajid..." required></textarea>
+    </div>
+    <button type="submit" class="submit-btn">Kirim Ucapan</button>
+  </form>
+  <div class="wishes" id="wishList"></div>
+  <div class="form-note">Ucapan tersimpan sementara di halaman ini saat undangan dibuka</div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="pattern-bg"></div>
+  <div class="bismillah">جَزَاكُمُ اللّٰهُ خَيْرًا كَثِيْرًا</div>
+  <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu. Atas kehadiran dan doanya, kami ucapkan terima kasih.</p>
+  <div class="fam">Keluarga Besar<br>Bapak &amp; Ibu</div>
+  <div class="credit">UNDANGAN DIGITAL · KHITANAN SAJID ABDULLAH ASSAMI · 2026</div>
+</section>
+
+<script>
+  // scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  },{threshold:0.15});
+  reveals.forEach(el=>io.observe(el));
+
+  // countdown — edit target date/time below
+  const target = new Date('2026-07-19T08:00:00+07:00').getTime();
+  function tick(){
+    const now = Date.now();
+    let diff = target - now;
+    if(diff < 0) diff = 0;
+    const d = Math.floor(diff/86400000);
+    const h = Math.floor((diff%86400000)/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    document.getElementById('cd-d').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+  }
+  tick();
+  setInterval(tick,1000);
+
+  // rsvp (in-memory only, resets on reload)
+  const form = document.getElementById('rsvpForm');
+  const wishList = document.getElementById('wishList');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const wish = document.getElementById('wish').value.trim();
+    const hadir = form.querySelector('input[name="hadir"]:checked').value;
+    if(!name || !wish) return;
+    const div = document.createElement('div');
+    div.className = 'wish';
+    div.innerHTML = '<b>'+name+' · '+hadir+'</b>'+wish;
+    wishList.prepend(div);
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
