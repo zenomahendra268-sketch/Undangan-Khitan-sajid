@@ -81,6 +81,11 @@ app.get('/to/:slug', (req, res) => {
     }
 });
 
+// General Invitation Route
+app.get('/undangan', (req, res) => {
+    res.render('invitation', { guestName: 'Tamu Undangan' });
+});
+
 // Default Route
 app.get('/', (req, res) => {
     res.render('invitation', { guestName: 'Tamu Undangan' });

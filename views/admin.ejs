@@ -113,6 +113,16 @@
 <body>
     <div class="container">
         <h1>Kelola Tamu Undangan</h1>
+
+        <!-- Link Umum Section -->
+        <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-bottom: 30px; border: 1px solid #bbdefb;">
+            <h3 style="margin-top: 0; color: #1565c0;">🔗 Link Undangan Umum</h3>
+            <p style="font-size: 14px; color: #555;">Gunakan link ini untuk disebarkan secara umum (tanpa nama perorangan):</p>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <code id="general-link" style="background: white; padding: 8px; border-radius: 4px; flex-grow: 1; border: 1px solid #90caf9;">Memuat link...</code>
+                <button class="btn-small btn-copy" onclick="copyGeneralLink()">Salin Link Umum</button>
+            </div>
+        </div>
         
         <!-- Form Tambah -->
         <form action="/admin/add-guest" method="POST">
@@ -180,6 +190,19 @@
     </div>
 
     <script>
+        // Set General Link on Load
+        window.onload = function() {
+            const protocol = window.location.protocol;
+            const host = window.location.host;
+            const generalLink = `${protocol}//${host}/undangan`;
+            document.getElementById('general-link').innerText = generalLink;
+        };
+
+        function copyGeneralLink() {
+            const link = document.getElementById('general-link').innerText;
+            copyToClipboard(link);
+        }
+
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
                 alert('Link berhasil disalin!');
