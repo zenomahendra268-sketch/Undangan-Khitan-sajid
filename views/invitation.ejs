@@ -709,9 +709,13 @@
     div.innerHTML = '<b>'+name+' · '+hadir+'</b>'+wish;
     wishList.prepend(div);
 
-    // Kirim ke WhatsApp
+    // Kirim ke WhatsApp dengan format keren
     const phoneNumber = "6283892111623";
-    const message = `Halo, saya *${name}*.\n\nKonfirmasi Kehadiran: *${hadir}*\nUcapan & Doa: ${wish}`;
+    const message = `*Konfirmasi Kehadiran - Undangan Khitanan Sajid*\n\n` +
+                    `✨ *Nama:* ${name}\n` +
+                    `✅ *Status:* ${hadir}\n\n` +
+                    `💬 *Ucapan & Doa:*\n"${wish}"\n\n` +
+                    `Terima kasih! 🙏`;
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 

@@ -37,7 +37,9 @@ app.post('/admin/add-guest', (req, res) => {
         
         const existing = guests.find(g => g.slug === slug);
         if (!existing) {
-            const guestLink = `${req.protocol}://${req.get('host')}/to/${slug}`;
+            // Memastikan menggunakan https jika di production (seperti Railway)
+            const protocol = req.headers['x-forwarded-proto'] || req.protocol;
+            const guestLink = `${protocol}://${req.get('host')}/to/${slug}`;
             guests.push({ id: Date.now(), name, slug, link: guestLink });
             saveGuests(guests);
         }
@@ -51,7 +53,8 @@ app.post('/admin/edit-guest', (req, res) => {
     const index = guests.findIndex(g => g.id == id);
     if (index !== -1) {
         const slug = name.toLowerCase().trim().replace(/ /g, '-').replace(/[^\w-]+/g, '');
-        const guestLink = `${req.protocol}://${req.get('host')}/to/${slug}`;
+        const protocol = req.headers['x-forwarded-proto'] || req.protocol;
+        const guestLink = `${protocol}://${req.get('host')}/to/${slug}`;
         guests[index] = { ...guests[index], name, slug, link: guestLink };
         saveGuests(guests);
     }
