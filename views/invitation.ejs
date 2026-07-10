@@ -185,6 +185,7 @@
   .guest-box {
     margin-top: 20px;
     padding: 15px;
+    border: 1px solid var(--gold-soft); /* Mengembalikan border emas */
     background: rgba(228, 200, 119, 0.1);
     border-radius: 8px;
     opacity: 0;
@@ -212,10 +213,8 @@
     animation:fadeIn 1s ease 3.3s forwards;
   }
   .scroll-cue span{
-    width:1px;height:22px;background:linear-gradient(var(--gold),transparent);
-    animation:scrollLine 1.6s ease-in-out infinite;
+    display: none; /* Menghapus garis emas vertikal */
   }
-  @keyframes scrollLine{0%,100%{opacity:.3;}50%{opacity:1;}}
 
   /* ---------- opening ---------- */
   .opening{text-align:center;}
