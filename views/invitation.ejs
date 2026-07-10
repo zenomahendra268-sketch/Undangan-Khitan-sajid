@@ -572,7 +572,7 @@
       <div class="ico">Lokasi</div>
       <div class="val"><strong>Kediaman Keluarga</strong>Kp. Cibuluh RT 025/RW 10</div>
     </div>
-    <a class="map-btn" href="#" onclick="return false;">Lihat Peta Lokasi</a>
+    <a class="map-btn" href="https://maps.app.goo.gl/ekjayy2MuPqLiLyG9" target="_blank">Lihat Peta Lokasi</a>
   </div>
 
   <div class="countdown" id="countdown">
@@ -673,16 +673,35 @@
   tick();
   setInterval(tick,1000);
 
-  // rsvp & WhatsApp Integration
+  // rsvp & WhatsApp Integration with Spam Protection
   const form = document.getElementById('rsvpForm');
   const wishList = document.getElementById('wishList');
+  const submitBtn = form.querySelector('.submit-btn');
+  
+  // Check if this guest has already submitted (using localStorage)
+  const guestId = "<%= guestName %>"; // Identifikasi berdasarkan nama tamu
+  const hasSubmitted = localStorage.getItem('rsvp_submitted_' + guestId);
+  
+  if (hasSubmitted) {
+    form.innerHTML = '<div class="wish" style="text-align:center; border-left:none; background:#e8f5e9;"><b>Terima Kasih!</b>Konfirmasi kehadiran Anda telah terkirim.</div>';
+  }
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
+    
+    if (localStorage.getItem('rsvp_submitted_' + guestId)) {
+      alert('Anda sudah mengirimkan konfirmasi.');
+      return;
+    }
+
     const name = document.getElementById('name').value.trim();
     const wish = document.getElementById('wish').value.trim();
     const hadir = form.querySelector('input[name="hadir"]:checked').value;
     
     if(!name || !wish) return;
+
+    // Simpan status sudah kirim
+    localStorage.setItem('rsvp_submitted_' + guestId, 'true');
 
     // Tampilkan di list (sementara)
     const div = document.createElement('div');
@@ -699,7 +718,8 @@
     // Buka WhatsApp di tab baru
     window.open(whatsappUrl, '_blank');
     
-    form.reset();
+    // Ubah tampilan form setelah kirim
+    form.innerHTML = '<div class="wish" style="text-align:center; border-left:none; background:#e8f5e9;"><b>Terima Kasih!</b>Konfirmasi kehadiran Anda telah terkirim.</div>';
   });
 </script>
 
